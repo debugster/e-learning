@@ -1,0 +1,6 @@
+.card
+  .card-header
+    span.h5 = "Edit Course"
+  .card-body
+    = simple_form_for [:admin, @course] do |f|
+      = render partial: 'form', locals: { f: f }

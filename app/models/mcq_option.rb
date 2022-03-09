@@ -1,0 +1,2 @@
+class McqOption < ApplicationRecord
+end

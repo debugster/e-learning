@@ -1,0 +1,10 @@
+.card.mb-3
+  .card-header
+    .row
+      .col-md-6
+        span.h5 = "Exam on #{@lesson.title}"
+      .col-md-6.text-end
+        span.h5 = "Duration: #{@lesson.time_limit} Minutes"
+  .card-body
+    = simple_form_for [:student, @lesson, @exam] do |f|
+      = render partial: "form", locals: { f: f }

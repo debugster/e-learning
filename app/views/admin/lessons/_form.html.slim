@@ -1,0 +1,41 @@
+.card
+  - if @lesson.errors.any?
+    .card-header
+      .px-3.alert.alert-danger
+        span.h6 = f.error_notification
+        ul
+        - @lesson.errors.full_messages.each do |msg|
+          li = msg
+  .card-body.row.justify-content-center.m-0
+    .col-md-6
+      fieldset.mb-2
+        .row
+          .col-md-4.text-end
+            label.h6 Lesson Title
+          .col-md-8
+            = f.text_field :title,
+                    class: "form-control form-control-sm"
+      fieldset.mb-3
+        .row
+          .col-md-4.text-end
+            label.h6 Duration (minutes)
+          .col-md-8
+            = f.number_field :time_limit,
+                    class: "form-control form-control-sm"
+
+    hr.mb-3
+
+    .h5.text-center MCQs
+    .col-md-6
+      table.table.table-sm.lesson-mcq-table data-mcq-limit="#{Lesson::MCQ_LIMIT}"
+        tbody.mcqs
+          = f.simple_fields_for :mcqs do |mcqs_form|
+            = render partial: "admin/lessons/mcq_fields", locals: { f: mcqs_form }
+
+.text-center.mt-3
+  = button_tag type: "submit", class: "btn btn-sm btn-primary me-2 lesson-submit-button"
+    i class = "#{ @lesson.persisted? ? 'fa-arrow-circle-up' : 'fa-save'} fa mt-0 me-1"
+    span = @lesson.persisted? ? "Update" : "Create"
+  = link_to admin_course_path(@course), class: 'btn btn-sm btn-secondary'
+    i.fa.fa-close
+    span.ms-1 Discard

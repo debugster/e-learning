@@ -1,0 +1,24 @@
+.row.login-page
+  .col-md-4.m-auto
+    h3
+      i.fa.fa-sign-in-alt aria-hidden="true"
+      span.ms-2 Log In
+    = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+      = f.error_notification
+
+      .mb-3
+        = f.label :email, "Email", class: "form-label"
+        = f.text_field :email, autofocus: true, class: "form-control"
+      .mb-3
+        = f.label :password, "Password", class: "form-label"
+        = f.password_field :password, autocomplete: "off", class: "form-control"
+
+      - if devise_mapping.rememberable?
+        .mb-3
+          = f.input :remember_me, as: :boolean, class: "form-check-input"
+
+      = button_tag type: "submit", class: "btn btn-sm btn-primary" do
+        i.fa.fa-sign-in-alt aria-hidden="true"
+        span.ms-1 Log In
+
+    = render "devise/shared/links"

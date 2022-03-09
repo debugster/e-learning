@@ -1,0 +1,44 @@
+.card
+  .card-header
+    .row
+      .col-md-6
+        = link_to admin_courses_path, class: "btn btn-sm btn-secondary"
+          i.fa.fa-chevron-left aria-hidden="true"
+          span.ms-1 All Courses
+        span.h5.ms-3 = "[#{@course.code}] #{@course.title}"
+      .col-md-6.d-flex.justify-content-end
+        = link_to new_admin_course_lesson_path(@course), class: "btn btn-sm btn-primary me-1"
+          i.fa.fa-plus aria-hidden="true"
+          span.ms-1 Add New Lesson
+        = link_to admin_course_path(@course),
+                method: :delete,
+                data: { confirm: "Are you sure to delete this course?" },
+                class: "btn btn-sm btn-danger"
+          i.fa.fa-trash-alt aria-hidden="true"
+          span.ms-1 Delete Course
+  .card-body
+    table.table.table-sm.table-striped.table-hover.table-borderless.e-learning-datatable
+      thead.table-light
+        tr
+          th = "#"
+          th = "Title"
+          th = "Duration (minutes)"
+          th = "Actions"
+      tbody
+        - @course.lessons.each_with_index do |lesson, index|
+          tr
+            td = index + 1
+            td = lesson.title
+            td = lesson.time_limit
+            td
+              = link_to admin_course_lesson_path(@course, lesson),
+                      title: "View Lesson Details",
+                      data: { "bs-toggle": "tooltip", "bs-placement": "top" },
+                      class: "btn btn-sm btn-info"
+                i.fa.fa-eye aria-hidden="true"
+
+              = link_to edit_admin_course_lesson_path(@course, lesson),
+                      title: "Edit Lesson",
+                      data: { "bs-toggle": "tooltip", "bs-placement": "top" },
+                      class: "btn btn-sm btn-warning ms-1"
+                i.fa.fa-edit aria-hidden="true"

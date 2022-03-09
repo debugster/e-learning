@@ -1,0 +1,14 @@
+tr.nested-fields
+  td
+    = link_to_remove_association f, class: 'btn btn-sm btn-danger'
+      i.fa.fa-trash-alt
+  td.text-center
+    .row
+      .col-md-2.text-end
+        label.small Option
+      .col-md-8
+        = f.text_area :title,
+                class: "form-control form-control-sm"
+      .col-md-2
+        = f.check_box :correct,
+                class: "form-check-input"

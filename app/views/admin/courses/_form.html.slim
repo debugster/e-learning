@@ -1,0 +1,32 @@
+.card
+  - if @course.errors.any?
+    .card-header
+      .px-3.alert.alert-danger
+        span.h6 = f.error_notification
+        ul
+        - @course.errors.full_messages.each do |msg|
+          li = msg
+  .card-body.row.justify-content-center.m-0
+    .col-md-6
+      fieldset.mb-2
+        .row
+          .col-md-4.text-end
+            label.h6 Course Code
+          .col-md-8
+            = f.text_field :code,
+                    class: "form-control form-control-sm"
+      fieldset.mb-2
+        .row
+          .col-md-4.text-end
+            label.h6 Course Title
+          .col-md-8
+            = f.text_field :title,
+                    class: "form-control form-control-sm"
+      .text-center.mt-3
+        = button_tag type: "submit", class: "btn btn-sm btn-primary me-2"
+          i class = "#{ @course.persisted? ? 'fa-arrow-circle-up' : 'fa-save'} fa mt-0 me-1"
+          span = @course.persisted? ? "Update" : "Create"
+        = link_to admin_courses_path,
+                class: 'btn btn-sm btn-secondary'
+          i.fa.fa-close
+          span.ms-1 Discard

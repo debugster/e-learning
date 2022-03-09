@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title E-Learning
+    = favicon_link_tag 'favicon.png'
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    = render "shared/navbar"
+    .container.flash-msg
+      - flash.each do |type, msg|
+        - class_name = "alert alert-dismissible fade show "
+        - case type
+        - when "success"
+          - class_name += "alert-success"
+        - when "notice"
+          - class_name += "alert-primary"
+        - when "warning"
+          - class_name += "alert-warning"
+        - when "error"
+          - class_name += "alert-danger"
+        - else
+          - class_name += "alert-info"
+
+        div class="#{class_name}" role="alert"
+          = msg
+          button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+    .container
+      = yield

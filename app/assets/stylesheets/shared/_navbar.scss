@@ -1,0 +1,16 @@
+.navbar {
+  background-color: #563d7c;
+}
+
+.navbar-logo {
+  width: 7%;
+  height: auto;
+}
+
+.nav-link {
+  color: white;
+
+  &:hover {
+    color: yellow;
+  }
+}

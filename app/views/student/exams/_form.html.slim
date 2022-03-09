@@ -1,0 +1,20 @@
+- @lesson.mcqs.each_with_index do |mcq, index|
+  .card.mb-3
+    .card-header
+      .h6 = "Q-#{index + 1}: #{mcq.title}"
+    .card-body
+      - mcq.mcq_options.each do |mcq_option|
+        .row
+          .col-md-12
+            = f.simple_fields_for "exam_answers[#{mcq.id}" do |mcq_answer_form|
+              .form-check
+                = mcq_answer_form.radio_button :selected_option, mcq_option.id, class: "form-check-input"
+                = mcq_answer_form.label "#{mcq_option.title}", class: "form-check-label"
+
+.text-center.mt-3
+  = button_tag type: "submit", class: "btn btn-sm btn-primary me-2"
+    i.fa.fa-arrow-circle-up.me-1
+    span Finish Exam
+  = link_to student_lessons_path,  class: 'btn btn-sm btn-secondary'
+    i.fa.fa-close
+    span.ms-1 Discard

@@ -1,0 +1,30 @@
+nav.navbar.navbar-expand-lg.fixed-top
+  .container
+    = link_to root_path, class: "navbar-brand"
+      = image_tag "logo.png", class: "navbar-logo"
+
+    button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      span.navbar-toggler-icon
+
+    div.collapse.navbar-collapse#navbarSupportedContent
+      ul.navbar-nav.me-auto
+        / - if user_signed_in?
+          li.nav-item
+            = link_to "Home", root_path, class: "nav-link"
+
+      ul.navbar-nav
+        - if user_signed_in?
+          li.nav-item
+            = link_to destroy_user_session_path, method: :delete, class: "nav-link btn btn-sm btn-outline-danger"
+              i.fa.fa-sign-out-alt aria-hidden="true"
+              span.ms-1 Logout
+        - else
+          li.nav-item.me-2
+            = link_to new_user_registration_path, class: "nav-link btn btn-sm btn-outline-primary"
+              i.fa.fa-user-plus aria-hidden="true"
+              span.ms-1 Register
+
+          li.nav-item
+            = link_to new_user_session_path, class: "nav-link btn btn-sm btn-outline-success"
+              i.fa.fa-sign-in-alt aria-hidden="true"
+              span.ms-1 Login

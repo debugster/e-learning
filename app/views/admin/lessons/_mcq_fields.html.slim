@@ -1,0 +1,24 @@
+tr.nested-fields
+  / td
+    = link_to_remove_association f, class: 'btn btn-sm btn-danger'
+      i.fa.fa-trash-alt
+  td.text-center
+    .row
+      .col-md-4.text-end
+        label.h6.mcq-title Question
+      .col-md-8
+        = f.text_area :title,
+                class: "form-control form-control-sm"
+    .row
+      table.table.table-sm.table-borderless
+        tbody.mcq-options
+          = f.simple_fields_for :mcq_options do |mcq_options_form|
+            = render partial: "admin/lessons/mcq_option_fields", locals: { f: mcq_options_form }
+      = link_to_add_association f,
+              :mcq_options,
+              class: "btn btn-sm btn-primary",
+              data: { association_insertion_node: '.mcq-options',
+                      association_insertion_method: :append }
+        i.fa.fa-plus
+        span.ms-1 Option
+
