@@ -1,0 +1,41 @@
+.card
+  .card-header
+    .row
+      .col-md-6
+        = link_to student_exams_path, class: "btn btn-sm btn-secondary"
+          i.fa.fa-chevron-left aria-hidden="true"
+          span.ms-1 All Exams
+      .col-md-6.text-end
+        = "Lesson: #{@lesson.title}"
+  .card-body.text-center
+    .row
+      .col-md-6.text-end
+        .h5 Course Code
+      .col-md-6.text-start
+        .h5.fw-light = @lesson.course.code
+    .row
+      .col-md-6.text-end
+        .h5 Course Title
+      .col-md-6.text-start
+        .h5.fw-light = @lesson.course.title
+    .row
+      .col-md-6.text-end
+        .h5 Lesson Title
+      .col-md-6.text-start
+        .h5.fw-light = @lesson.title
+    .row
+      .col-md-6.text-end
+        .h5 Total MCQs
+      .col-md-6.text-start
+        .h5.fw-light = @score[:total_mcq]
+    .row
+      .col-md-6.text-end
+        .h5 Correctly Answered
+      .col-md-6.text-start
+        .h5.fw-light = @score[:correctly_answered]
+    .row
+      .col-md-6.text-end
+        .h5 Success Rate(%)
+      .col-md-6.text-start
+        .h5.fw-light = @score[:percentage]
+

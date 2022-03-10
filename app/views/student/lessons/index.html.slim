@@ -12,17 +12,26 @@
           th = "#"
           th = "Title"
           th = "Course"
-          th = "Latest Score"
-          th = "Max Score"
+          th.text-center = "Latest Score"
+          th.text-center = "Max Score"
           th = "Actions"
       tbody
         - @lessons.each_with_index do |lesson, index|
           tr
+            - appeared = lesson.appeared?(current_user.id)
             td = index + 1
             td = lesson.title
             td = "[#{lesson.course.code}] #{lesson.course.title}"
-            td = "#{lesson.latest_score_of(current_user.id)}"
-            td = "#{lesson.max_score_of(current_user.id)}"
+            td.text-center
+              - if appeared
+                = "#{lesson.latest_score_of(current_user.id)[:percentage]}%"
+              - else
+                = "N/A"
+            td.text-center
+              - if appeared
+                = "#{lesson.max_score_of(current_user.id)}%"
+              - else
+                = "N/A"
             td
               = link_to new_student_lesson_exam_path(lesson), class: "btn btn-sm btn-primary"
                 i.fa.fa-book-reader aria-hidden="true"

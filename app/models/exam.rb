@@ -8,13 +8,20 @@ class Exam < ApplicationRecord
                                 allow_destroy: true
 
   def score
-    total_score = 0
+    score_details = {
+      total_mcq: lesson.mcqs.count,
+      correctly_answered: 0,
+      percentage: 0.0
+    }
     exam_answers.each do |answer|
       if McqOption.find(answer.selected_option).correct
-        total_score += 1
+        score_details[:correctly_answered] += 1
       end
     end
-    ((total_score * 1.0) / exam_answers.count) * 100.0
+    score_details[:percentage] =
+      ((score_details[:correctly_answered] * 1.0) /
+        score_details[:total_mcq]) * 100.0
+    score_details
   end
 
   def create_exam_answers(data)

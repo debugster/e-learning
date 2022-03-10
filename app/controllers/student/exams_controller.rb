@@ -1,8 +1,9 @@
 class Student::ExamsController < StudentController
-  before_action :set_lesson, only: %i[new create]
+  before_action :set_lesson, only: %i[new create show]
+  before_action :set_exam, only: %i[show]
 
   def index
-
+    @exams = current_user.exams
   end
 
   def new
@@ -24,7 +25,7 @@ class Student::ExamsController < StudentController
   end
 
   def show
-
+    @score = @exam.score
   end
 
   private

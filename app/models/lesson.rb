@@ -18,6 +18,10 @@ class Lesson < ApplicationRecord
     false
   end
 
+  def appeared?(student_id)
+    exams.where(user_id: student_id).present?
+  end
+
   def latest_score_of(student_id)
     last_exam = exams.where(user_id: student_id).order('created_at desc').first
     if last_exam.nil?
@@ -34,7 +38,7 @@ class Lesson < ApplicationRecord
     else
       scores = []
       all_exam.each do |exam|
-        scores << exam.score
+        scores << exam.score[:percentage]
       end
       scores.max
     end

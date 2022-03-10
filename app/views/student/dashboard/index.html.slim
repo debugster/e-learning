@@ -15,4 +15,18 @@
             i.fa.fa-eye aria-hidden="true"
             span.ms-1 View
   .col-md-4
+    .card
+      .card-header
+        h5 Exams
+      .card-body
+        .card-title
+          .row
+            .col-md-8
+              h6 Your exams
+            .col-md-4.text-end
+              h6 = current_user.exams.count
+        .text-end
+          = link_to student_exams_path, class: "btn btn-sm btn-success"
+            i.fa.fa-eye aria-hidden="true"
+            span.ms-1 View
   .col-md-4

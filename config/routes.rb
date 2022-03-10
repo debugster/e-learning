@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
     get '/', to: 'dashboard#index'
     resources :lessons do
-      resources :exams
+      resources :exams, except: [:index]
     end
+    resources :exams, only: [:index]
   end
 
   root 'home#index'

@@ -1,0 +1,23 @@
+.card
+  .card-header
+    .h5 = "Total Exams: #{current_user.exams.count}"
+  .card-body
+    table.table.table-sm.table-borderless.table-hover.table-striped.e-learning-datatable
+      thead.table-light
+        tr
+          th = "#"
+          th = "Course"
+          th = "Lesson"
+          th.text-center = "Score"
+          th = "Actions"
+      tbody
+        - @exams.each_with_index do |exam, index|
+          tr
+            td = index + 1
+            td = "[#{exam.lesson.course.code}] #{exam.lesson.course.title}"
+            td = "#{exam.lesson.title}"
+            td.text-center = "#{exam.score[:percentage]}%"
+            td
+              = link_to student_lesson_exam_path(exam.lesson, exam), class: "btn btn-sm btn-primary"
+               i.fa.fa-eye aria-hidden="true"
+               span.ms-1 Details
